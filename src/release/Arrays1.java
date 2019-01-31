@@ -17,6 +17,29 @@ static void insert(Student student)
     }
 }
 
+public Student remove(int rollNo)
+{Student temp=null;
+    if(bottom !=-1)
+    {
+        for(int i=0;i<= bottom;i++)
+        {
+            if(sectionG[i].getRollno()==rollNo)
+            {
+              temp =sectionG[i];
+                sectionG[i]=null;
+                int j;
+                for ( j = i; j < sectionG.length-1; j++) {
+                  sectionG[j]=sectionG[j+1];
+
+                }
+                sectionG[j]=null;
+                bottom--;
+            }
+        }
+    }
+return temp;
+}
+
 public Arrays1(int numberOfStudent)
 {
     sectionG  = new Student[numberOfStudent];
@@ -27,7 +50,7 @@ public void display()
 {
     for(Student student: sectionG)
     {
-        System.out.println(student.getName());
+        System.out.println(student);
     }
 }
 
@@ -41,20 +64,16 @@ public void display()
         student1.setRollno(i +1);
         //scan.nextLine();
         //System.out.println("enter name");
-        student1.setName("guddu"+i);
+        student1.setName("guddu"+i+1);
 
             list.insert(student1);
 
     }
-//        for(Student student: sectionG)
-//        {
-//            if(student!=null)
-//        {
-//            System.out.println(student);
-//        }
-//        }
+
         list.display();
-    }
+        System.out.println("Removed element="+list.remove(5));
+    list.display();
+}
 
 }
 
@@ -63,6 +82,7 @@ class Student
     private int rollno;
     private String name;
     //getters and setters
+
 
     public int getRollno() {
         return rollno;
@@ -79,7 +99,8 @@ class Student
     public void setName(String name) {
         this.name = name;
     }
-@Override
+
+    @Override
     public String toString()
     {
         return (rollno + " " +name);
